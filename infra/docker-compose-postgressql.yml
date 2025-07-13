@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  db:
+    image: bitnami/postgresql
+    container_name: db_parking
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - "POSTGRESQL_USERNAME=${POSTGRES_USER}"
+      - "POSTGRESQL_PASSWORD=${POSTGRES_PASSWORD}"
+      - "POSTGRESQL_DATABASE=${POSTGRES_DB}"
+    env_file:
+      - ../.env
+    networks:
+      net_parking:
+        ipv4_address: 172.7.1.10
+
+networks:
+  net_parking:
+    external: true
