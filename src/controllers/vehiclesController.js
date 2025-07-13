@@ -1,13 +1,11 @@
-const db = require("../config/db");
+import { clientDB } from "../config/db.js";
 
-const getVehicles = async ( req, res) => {
+export const getVehicles = async (req, res) => {
     try {
-        const result = await db.query("SELECT * FROM vehicles");
+        const result = await clientDB.query("SELECT * FROM vehicles");
         res.status(200).json(result.rows);
     } catch (err) {
-        console.error(err,message);
+        console.error(err.message);
         res.status(500).json({ error: "Erro ao buscar veículos" });
     }
 };
-
-module.exports = { getVehicles };
