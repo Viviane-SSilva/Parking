@@ -1,8 +1,12 @@
-import { clientDB } from "../config/db.js";
+import { prisma } from "../config/prisma.js";
 
 export const getVehicles = async (req, res) => {
     try {
-        const result = await clientDB.query("SELECT * FROM vehicles");
+        const result = await prisma.user.findUnique({
+            where: {
+                id: 1
+            }
+        })
         res.status(200).json(result.rows);
     } catch (err) {
         console.error(err.message);
